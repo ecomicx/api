@@ -4,14 +4,17 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['POSTGRES_HOST'] %>
+  # host: <%= ENV['POSTGRES_HOST'] %>
+  host: 172.21.0.2 # unica forma de conectar ao banco de dados já que não é possível rodar a api no docker-compose
   port: 5432
 
 development:
   <<: *default
   database: ecomicx_development
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  # username: <%= ENV['POSTGRES_USER'] %>
+  # password: <%= ENV['POSTGRES_PASSWORD'] %>
+  username: postgres # unica forma de conectar ao banco de dados já que não é possível rodar a api no docker-compose
+  password: postgres # unica forma de conectar ao banco de dados já que não é possível rodar a api no docker-compose
 
 test:
   <<: *default
