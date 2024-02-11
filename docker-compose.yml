@@ -23,7 +23,16 @@ services:
       - db
   web:
     build: .
-    command: "./bin/rails server"
+    tty: true
+    stdin_open: true
+    restart: always
+    command: >
+      sh -c "bundle install &&
+             bundle exec rails db:create &&
+             bundle exec rails db:migrate &&
+             bundle exec rails db:seed &&
+             rm -f tmp/pids/server.pid &&
+             RAILS_SERVE_STATIC_FILES=true bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       - RAILS_ENV=${RAILS_ENV}
       - POSTGRES_HOST=${POSTGRES_HOST}

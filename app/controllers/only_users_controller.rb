@@ -4,7 +4,7 @@ class OnlyUsersController < ApplicationController
 
     Wallet.create!(user_id: user.id, balance: 0, status: :non_balance) if user.present? && user.wallet.blank?
 
-    render json: { message: 'usuario criado com sucesso', user: user }, status: :created
+    render json: { message: 'usuario criado com sucesso', user: user.presence }, status: :created
   end
 
   def update
@@ -13,7 +13,7 @@ class OnlyUsersController < ApplicationController
 
     Wallet.create!(user_id: user.id, balance: 0, status: :non_balance) if user.present? && user.wallet.blank?
 
-    render json: { message: 'usuario criado com sucesso', user: user }, status: :created
+    render json: { message: 'usuario criado com sucesso', user: }, status: :created
   end
 
   private

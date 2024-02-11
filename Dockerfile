@@ -19,7 +19,10 @@ ENV RAILS_LOG_TO_STDOUT="1" \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
+
+RUN gem install bundler:2.2.28
 RUN bundle install
+
 
 # Copy application code
 COPY . .
@@ -35,4 +38,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["irb"]
