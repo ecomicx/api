@@ -1,4 +1,5 @@
 class OnlyUsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def create
     user = User.create!(permitted_params)
 
@@ -13,7 +14,7 @@ class OnlyUsersController < ApplicationController
 
     Wallet.create!(user_id: user.id, balance: 0, status: :non_balance) if user.present? && user.wallet.blank?
 
-    render json: { message: 'usuario criado com sucesso', user: }, status: :created
+    render json: { message: 'usuario criado com sucesso', user: user.presence }, status: :created
   end
 
   private

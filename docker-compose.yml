@@ -32,7 +32,7 @@ services:
              bundle exec rails db:migrate &&
              bundle exec rails db:seed &&
              rm -f tmp/pids/server.pid &&
-             RAILS_SERVE_STATIC_FILES=true bundle exec rails s -p 3000 -b '0.0.0.0'"
+             RAILS_SERVE_STATIC_FILES=false bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       - RAILS_ENV=${RAILS_ENV}
       - POSTGRES_HOST=${POSTGRES_HOST}
@@ -41,7 +41,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     volumes:
-      - app-storage:/rails/storage
+      - .:/api
     depends_on:
       - db
     ports:
@@ -49,4 +49,4 @@ services:
 
 volumes:
   postgres_data: {}
-  app-storage: {}
+  api: {}
