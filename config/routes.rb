@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
-
   scope '/', defaults: { format: :json } do
     root to: 'home#index'
-    resources :only_users
+    resources :users
+    post 'login', to: 'users#login'
   end
 end
