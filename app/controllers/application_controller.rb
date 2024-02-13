@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     JWT.decode(token, Rails.application.credentials.secret_key_base)
   end
 
-  def authorize_request
+  def authorize_request!
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
